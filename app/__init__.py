@@ -23,8 +23,8 @@ handler = WebhookHandler(CHANNEL_SECRET)
 
 @app.route('/')
 def home():
-    # return 'Hello tomazium bot.'
-    return CHANNEL_ACCESS_TOKEN + "\n" + CHANNEL_SECRET
+    return 'Hello tomazium bot.'
+    # return CHANNEL_ACCESS_TOKEN + "\n" + CHANNEL_SECRET
 
 
 @app.route("/callback", methods=['POST'])
