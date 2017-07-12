@@ -1,8 +1,6 @@
 import sys
 
 from flask import Flask, abort, request
-from utils import config_loader
-from message.handler import msg_handler
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -13,6 +11,8 @@ from linebot.exceptions import (
 from linebot.models import (
     MessageEvent, TextMessage)
 
+from core.core_bot import Brain
+from utils import config_loader
 
 app = Flask(__name__)
 
@@ -27,12 +27,8 @@ if CHANNEL_ACCESS_TOKEN is None:
     print('Specify LINE_CHANNEL_ACCESS_TOKEN as environment variable.')
     sys.exit(1)
 
-
 line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(CHANNEL_SECRET)
-
-
-
 
 
 @app.route('/')
@@ -63,7 +59,9 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    msg_handler.handle_msg(event)
+    bot = Brain(line_bot_api)
+    bot.handle_msg(event)
+
 
 if __name__ == "__main__":
     app.run()
