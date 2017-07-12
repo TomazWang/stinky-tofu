@@ -1,11 +1,11 @@
 from flask import Flask
-# from app import config_loader
+from app import config_loader
 
 app = Flask(__name__)
 
-# config_data = config_loader.load_config()
-# CHANNEL_ACCESS_TOKEN = config_data.channel_access_token
-# CHANNEL_SECRET = config_data.channel_secret
+config_data = config_loader.load_config()
+CHANNEL_ACCESS_TOKEN = config_data.channel_access_token
+CHANNEL_SECRET = config_data.channel_secret
 #
 # line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
 # handler = WebhookHandler(CHANNEL_SECRET)
@@ -13,8 +13,8 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return 'Hello tomazium bot.'
-    # return CHANNEL_ACCESS_TOKEN + "\n" + CHANNEL_SECRET
+    # return 'Hello tomazium bot.'
+    return CHANNEL_ACCESS_TOKEN + "\n" + CHANNEL_SECRET
 
 
 # @app.route("/callback", methods=['POST'])
