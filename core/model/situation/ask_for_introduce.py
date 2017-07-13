@@ -1,3 +1,5 @@
+import emoji
+
 from core.model.situation.abc_situation import Situation
 
 
@@ -9,7 +11,8 @@ class AskingForIntroduceSitu(Situation):
         self.keywords = ['你是誰', '自我介紹']
 
     def get_response(self):
-        return '我是臭豆腐機器人，目前還在測試中，請多指教 \U0x10008D \n'
+
+        return emoji.emojize('我是臭豆腐機器人，目前還在測試中，請多指教 :smile::thumbsup: \n', use_aliases=True)
 
     def __contains__(self, command):
         if type(command) is not str:
