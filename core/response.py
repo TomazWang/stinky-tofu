@@ -1,9 +1,11 @@
 import random
+from typing import List
 
 from linebot import LineBotApi
 from linebot.models import MessageEvent
 
-from core.msg_parser import UserMessage
+from core.model.situation.abc_situation import Situation
+from core.model.user_message import UserMessage
 
 
 def get_unknown_res():
@@ -15,27 +17,14 @@ def get_unknown_res():
     return random.choice(responses)
 
 
-def get_introduce_res():
-    responses = [
-        '我是臭豆腐機器人，目前還在測試中，請多指教(moon grin)(moon grin)'
-    ]
-
-    return random.choice(responses)
-
-
-def get_who_res(user_name: str):
-    return "你是" + user_name + "啊～"
-
-
-def response_to(user_msg: UserMessage, event: MessageEvent, line_bot_api: LineBotApi) -> str:
+def response_to(user_msg: UserMessage, situations: List[Situation]) -> str:
     """ 
     response_to generate suitable response for specific message. 
     """
     response_str = get_unknown_res()
-    if user_msg.type is UserMessage.TYPE_WHO:
-        user_profile = line_bot_api.get_profile(event.source.user_id)
-        response_str = get_who_res(user_profile.display_name)
-    elif user_msg.type is UserMessage.TYPE_INTRODUCE:
-        response_str = get_introduce_res()
+
+    for situation in situations:
+        if situation.get_message_type is user_msg.type:
+            return situation.get_response()
 
     return response_str

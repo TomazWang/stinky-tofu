@@ -1,6 +1,7 @@
 import unittest
 
-from core.msg_parser import parse_msg, UserMessage
+from core.model.user_message import UserMessage
+from core.msg_parser import parse_msg
 
 
 class TestMsg_Parser(unittest.TestCase):

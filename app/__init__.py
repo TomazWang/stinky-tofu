@@ -37,7 +37,12 @@ def home():
     # return CHANNEL_ACCESS_TOKEN + "\n" + CHANNEL_SECRET
 
 
-@app.route("/callback", methods=['POST'])
+@app.route("/bot/stinky/info")
+def bot_info_stinky():
+    return "This page is not complete."
+
+
+@app.route("/bot/stinky/callback", methods=['POST'])
 def callback():
     print('app:callback')
     # get X-Line-Signature header value
@@ -46,7 +51,7 @@ def callback():
     # get request body as text
     body = request.get_data(as_text=True)
     app.logger.info("Request body: " + body)
-    print("app:callback     ", "Request body: ", body)
+    print("app:callback --- ", "Request body: ", body)
 
     # handle webhook body
     try:
@@ -59,7 +64,7 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    bot = Brain(line_bot_api)
+    bot = Brain(event, line_bot_api)
     bot.hear(event)
 
 
