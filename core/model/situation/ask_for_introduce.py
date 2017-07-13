@@ -10,7 +10,7 @@ class AskingForIntroduceSitu(Situation):
         super().__init__()
         self.keywords = ['你是誰', '自我介紹']
 
-    def get_response(self):
+    def get_response(self, text=""):
 
         return emoji.emojize('我是臭豆腐機器人，目前還在測試中，請多指教 :smile::thumbsup: \n', use_aliases=True)
 

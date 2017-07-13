@@ -10,7 +10,13 @@ class EchoSitu(Situation):
         self.keywords = ['說', '重複']
         self.context = EchoSitu.DEFAULT_RESPONSE
 
-    def get_response(self):
+    def get_response(self, text=""):
+        self.context = EchoSitu.DEFAULT_RESPONSE
+
+        sp = text.split(" ", 1)
+
+        if len(sp) > 1 and len(sp[1].strip()) > 0:
+            self.context = sp[1]
         return self.context
 
     def __contains__(self, text):
@@ -18,14 +24,9 @@ class EchoSitu(Situation):
             raise TypeError
 
         sp = text.split(" ", 1)
-
         command = sp[0]
-        sp.remove(command)
 
         if any(keyword in command.lower() for keyword in self.keywords):
-            self.context = EchoSitu.DEFAULT_RESPONSE
-            if len(sp) > 0 and len(sp[0].strip()) > 0:
-                self.context = sp[0]
             return True
         else:
             return False

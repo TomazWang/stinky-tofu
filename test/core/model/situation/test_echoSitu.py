@@ -12,17 +12,8 @@ class TestEchoSitu(TestCase):
         self.assertTrue("重複" in echo)
 
     def test_get_response(self):
-        if "說 你好" in echo:
-            self.assertEqual(echo.get_response(), "你好")
-
-        if "重複 hi" in echo:
-            self.assertEqual(echo.get_response(), "hi")
-
-        if "說 你好 我是豬" in echo:
-            self.assertEqual(echo.get_response(), "你好 我是豬")
-
-        if "說" in echo:
-            self.assertEqual(echo.get_response(), EchoSitu.DEFAULT_RESPONSE)
-
-        if "說    " in echo:
-            self.assertEqual(echo.get_response(), EchoSitu.DEFAULT_RESPONSE)
+        self.assertEqual(echo.get_response("說 你好"), "你好")
+        self.assertEqual(echo.get_response("重複 hi"), "hi")
+        self.assertEqual(echo.get_response("說 你好 我是豬"), "你好 我是豬")
+        self.assertEqual(echo.get_response("說"), EchoSitu.DEFAULT_RESPONSE)
+        self.assertEqual(echo.get_response("說    "), EchoSitu.DEFAULT_RESPONSE)

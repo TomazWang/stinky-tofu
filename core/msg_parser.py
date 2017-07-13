@@ -31,4 +31,4 @@ class MessageParser:
 
         if reply_to is None:
             msg_type = self.parse_simple_command(command_str)
-            return UserMessage(text, msg_type)
+            return UserMessage(command_str, msg_type)

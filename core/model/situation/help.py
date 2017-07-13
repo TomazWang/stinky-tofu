@@ -9,7 +9,7 @@ class AskingForHelpSitu(Situation):
         super().__init__()
         self.keywords = ['說明', '幫助', '解釋']
 
-    def get_response(self):
+    def get_response(self, text=""):
         # todo
         return '我是臭豆腐機器人，目前還在測試中，請多指教 \U0x10008D \n'
 

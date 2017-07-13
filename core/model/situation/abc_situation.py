@@ -9,7 +9,7 @@ class Situation(object, metaclass=abc.ABCMeta):
         pass
 
     @abc.abstractmethod
-    def get_response(self) -> str:
+    def get_response(self, text="") -> str:
         pass
 
     @abc.abstractmethod

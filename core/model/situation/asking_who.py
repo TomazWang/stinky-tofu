@@ -16,13 +16,12 @@ class AskingWhoSitu(Situation):
     def get_message_type(self) -> str:
         return AskingWhoSitu.TYPE_ASKING_WHO
 
-    def get_response(self):
-
+    def get_response(self, text=""):
         try:
             profile = self.api.get_profile(self.user_id)
             return "你是" + profile.display_name + "啊～"
         except LineBotApiError as e:
-            return '我還不認識你耶～\n'+'點這個連結讓我們成為好友吧\n'+'http://bit.ly/line-bot_stinky-tofu'
+            return '我還不認識你耶～\n' + '點這個連結讓我們成為好友吧\n' + 'http://bit.ly/line-bot_stinky-tofu'
 
     def __contains__(self, text):
         if type(text) is not str:
