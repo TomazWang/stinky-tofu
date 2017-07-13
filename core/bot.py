@@ -4,12 +4,6 @@ from core import response
 from core.msg_parser import *
 
 
-BOT_NAMES = ['臭豆腐', 'stinky', '機器人', 'bot']
-
-
-
-
-
 class Brain:
     """
     Brain is a class that distribute all message and reply as needed.

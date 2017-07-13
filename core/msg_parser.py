@@ -1,7 +1,5 @@
 from typing import Optional
 
-from core.bot import BOT_NAMES
-
 
 class UserMessage:
     # greeting (ex. Hi, Hello ...)
@@ -53,9 +51,12 @@ def parse_simple_command(text):
     return type_str
 
 
+BOT_NAMES = ['臭豆腐', 'stinky', '機器人', 'bot']
+
+
 def parse_msg(text: str, reply_to: str = None, skip_check=False) -> Optional[UserMessage]:
     text = text.lstrip()
-    is_calling_me = any(text.startswith(bot_name) for bot_name in BOT_NAMES)
+    is_calling_me = any(text.lower().startswith(bot_name) for bot_name in BOT_NAMES)
 
     if not skip_check and not is_calling_me:
         return None
