@@ -11,7 +11,7 @@ from linebot.exceptions import (
 from linebot.models import (
     MessageEvent, TextMessage)
 
-from core.core_bot import Brain
+from core.bot import Brain
 from utils import config_loader
 
 app = Flask(__name__)
@@ -60,7 +60,7 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     bot = Brain(line_bot_api)
-    bot.handle_msg(event)
+    bot.hear(event)
 
 
 if __name__ == "__main__":
