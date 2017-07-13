@@ -19,13 +19,14 @@ class Brain:
 
         self.user_id = event.source.user_id
 
+        self.situations = [
+            AskingWhoSitu(user_id=self.user_id, api=line_bot_api),
+            AskingForIntroduceSitu(),
+            EchoSitu()
+        ]
         self.ear = MessageParser(
             ['臭豆腐', 'stinky', '機器人'],
-            [
-                AskingWhoSitu(user_id=self.user_id, api=line_bot_api),
-                AskingForIntroduceSitu(),
-                EchoSitu()
-            ]
+            self.situations
         )
 
     def reply(self, reply_token, message):
@@ -39,5 +40,5 @@ class Brain:
         user_msg = self.ear.parse_msg(text)
 
         if user_msg is not None:
-            reply_msg = response.response_to(user_msg, event, self.line_bot_api)
+            reply_msg = response.response_to(user_msg, self.situations)
             self.reply(event.reply_token, reply_msg)
