@@ -24,7 +24,7 @@ def response_to(user_msg: UserMessage, situations: List[Situation]) -> str:
     response_str = get_unknown_res()
 
     for situation in situations:
-        if situation.get_message_type is user_msg.type:
+        if situation.get_message_type() == user_msg.type:
             return situation.get_response()
 
     return response_str

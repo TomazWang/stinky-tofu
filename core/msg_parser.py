@@ -10,11 +10,11 @@ class MessageParser:
         self.situations = situations
         self.bot_names = bot_names
 
-    def parse_simple_command(self, text):
+    def parse_simple_command(self, text) -> str:
 
         for situ in self.situations:
             if text in situ:
-                return situ.get_message_type
+                return situ.get_message_type()
 
         return UserMessage.TYPE_UNKNOWN
 
