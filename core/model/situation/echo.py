@@ -17,9 +17,12 @@ class EchoSitu(Situation):
             raise TypeError
 
         command = text.split(" ", 2)[0]
-        context = text.split(" ", 2)[1]
-        self.context = context
-        return any(keyword in command.lower() for keyword in self.keywords)
+
+        if any(keyword in command.lower() for keyword in self.keywords):
+            self.context = text.split(" ", 2)[1]
+            return True
+        else:
+            return False
 
     def get_message_type(self) -> str:
         return EchoSitu.TYPE_ECHO
