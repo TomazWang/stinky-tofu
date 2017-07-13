@@ -8,16 +8,17 @@ class EchoSitu(Situation):
     def __init__(self) -> None:
         super().__init__()
         self.keywords = ['說', '重複']
-        self.context = EchoSitu.DEFAULT_RESPONSE
 
     def get_response(self, text=""):
-        self.context = EchoSitu.DEFAULT_RESPONSE
-
+        reply = EchoSitu.DEFAULT_RESPONSE
+        print("EchoSitu: get_response --- ", "text = ", text)
         sp = text.split(" ", 1)
+        print("EchoSitu: get_response --- ", "sp = ", sp)
 
         if len(sp) > 1 and len(sp[1].strip()) > 0:
-            self.context = sp[1]
-        return self.context
+            reply = sp[1]
+            print("EchoSitu: get_response --- ", "reply = ", reply)
+        return reply
 
     def __contains__(self, text):
         if type(text) is not str:

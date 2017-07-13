@@ -21,8 +21,8 @@ class MessageParser:
     def parse_msg(self, text: str, reply_to: str = None, skip_check=False) -> Optional[UserMessage]:
         text = text.lstrip()
 
-        calling_str = text.split(" ", 2)[0]
-        command_str = text.split(" ", 2)[1]
+        calling_str = text.split(" ", 1)[0]
+        command_str = text.split(" ", 1)[1]
 
         is_calling_me = any(calling_str.lower().startswith(bot_name) for bot_name in self.bot_names)
 
