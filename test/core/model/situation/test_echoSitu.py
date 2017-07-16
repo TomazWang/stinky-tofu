@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from core.model.situation.echo import EchoSitu
+from app.core.model.situation import EchoSitu
 
 echo = EchoSitu()
 

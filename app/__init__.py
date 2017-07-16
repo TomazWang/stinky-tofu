@@ -1,7 +1,6 @@
 import sys
 
 from flask import Flask, abort, request
-
 from linebot import (
     LineBotApi, WebhookHandler
 )
@@ -11,8 +10,8 @@ from linebot.exceptions import (
 from linebot.models import (
     MessageEvent, TextMessage)
 
-from core.bot import Brain
-from utils import config_loader
+from app.core.bot import Brain
+from app.utils import config_loader
 
 app = Flask(__name__)
 
