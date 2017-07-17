@@ -12,7 +12,7 @@ class ResponseEvent:
         super().__init__()
         self.event_type = event_type
         self.reply_token = input_event.reply_token
-        self.reply_to = input_event.sender
+        self.reply_to = input_event.event_source
 
         if event_type == self.TYPE_MESSAGE:
             self.content = kwargs.get('content', '')

@@ -19,7 +19,7 @@ class AskingWhoCommandAdapter(NameCommandAdapter):
 
         response_event = ResponseEvent(ResponseEvent.TYPE_MESSAGE, input_event)
 
-        display_name = input_event.sender.display_name
+        display_name = input_event.source_content.sender.display_name
         if display_name is None or len(display_name) <= 0:
             response_event.content = emoji.emojize(
                 '我還不認識你耶～\n' +
