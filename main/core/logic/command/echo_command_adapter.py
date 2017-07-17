@@ -11,12 +11,12 @@ class EchoCommandAdapter(NameCommandAdapter):
         if not super().can_process(input_event):
             return False
 
-        message_text = super().filter_out_names(input_event.source_content).lstrip()
+        message_text = super().filter_out_names(input_event.content).lstrip()
         message_text = cht_utils.strip_leading_ch_symbol(message_text)
         return any(message_text.startswith(kw) for kw in self.keywords)
 
     def process(self, input_event: InputEvent) -> ResponseEvent:
-        message_text = super().filter_out_names(input_event.source_content).strip()
+        message_text = super().filter_out_names(input_event.content).strip()
         print('message_text = ('+message_text+')')
         message_text = cht_utils.strip_leading_ch_symbol(message_text)
         print('message_text = ('+message_text+')')

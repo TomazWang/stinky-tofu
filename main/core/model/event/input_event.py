@@ -18,11 +18,11 @@ class InputEvent:
         :param event_type: the type of this InputEvent.
         :param kwargs: kwargs contents all the detail of this InputEvent
         :param sender: sender is a Sender object that contents all detail of the sender of this InputEvent.
-        :param source_content: source_content 
+        :param content: content 
          
          
         '''
         self.event_type = event_type
-        self.source_content = kwargs.get('source_content', '')
+        self.content = kwargs.get('content', '')
         self.event_source = kwargs.get('event_source', Source())
         self.reply_token = kwargs.get('reply_token', '')

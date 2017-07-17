@@ -18,7 +18,7 @@ class TestEchoCommandAdapter(unittest.TestCase):
 
     def test_can_process(self):
         for statement in self.expect_dict.keys():
-            input_event = InputEvent(InputEvent.TYPE_TEXT, source_content=statement)
+            input_event = InputEvent(InputEvent.TYPE_TEXT, content=statement)
             self.assertEqual(
                 self.echo_adapter.can_process(input_event),
                 self.expect_dict[statement][0]
@@ -27,7 +27,7 @@ class TestEchoCommandAdapter(unittest.TestCase):
     def test_process(self):
         for statement in self.expect_dict.keys():
             print('testing ', statement, ':')
-            input_event = InputEvent(InputEvent.TYPE_TEXT, source_content=statement)
+            input_event = InputEvent(InputEvent.TYPE_TEXT, content=statement)
             res_event = self.echo_adapter.process(input_event)
 
             self.assertEqual(res_event.content, self.expect_dict[statement][1])

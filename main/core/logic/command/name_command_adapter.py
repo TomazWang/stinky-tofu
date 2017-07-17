@@ -14,7 +14,7 @@ class NameCommandAdapter(CommandAdapter):
         if not input_event.event_type == InputEvent.TYPE_TEXT:
             return False
 
-        message_text = input_event.source_content.lstrip()
+        message_text = input_event.content.lstrip()
 
         if any(message_text.startswith(name) for name in self.alias):
             return True

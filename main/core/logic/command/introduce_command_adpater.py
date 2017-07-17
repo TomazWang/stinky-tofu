@@ -12,7 +12,7 @@ class IntroduceCommandAdapter(NameCommandAdapter):
         if not super().can_process(input_event):
             return False
 
-        message_text = super().filter_out_names(input_event.source_content)
+        message_text = super().filter_out_names(input_event.content)
         return any(message_text.startswith(kw) for kw in self.keywords)
 
     def process(self, input_event: InputEvent) -> ResponseEvent:

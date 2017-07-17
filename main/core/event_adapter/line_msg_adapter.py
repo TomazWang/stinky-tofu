@@ -62,7 +62,7 @@ class LineMessageEventAdapter:
 
         input_event = InputEvent(
             message_type,
-            source_content=message_content,
+            content=message_content,
             reply_token=msg_event.reply_token,
             event_source=source
         )
@@ -70,7 +70,9 @@ class LineMessageEventAdapter:
         return input_event
 
     def handle_response(self, res_event: ResponseEvent):
-
+        if res_event is None:
+            # do nothing if no response required
+            return
         if res_event.event_type == res_event.TYPE_MESSAGE:
             message = res_event.content
             self.line_bot_api.reply_message(
