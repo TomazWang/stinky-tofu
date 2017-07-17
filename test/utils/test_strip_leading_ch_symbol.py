@@ -1,6 +1,6 @@
 import unittest
 
-from app.utils import cht_utils
+from main.utils import cht_utils
 
 
 class TestStrip_leading_ch_symbol(unittest.TestCase):

@@ -1,8 +1,8 @@
 import emoji
 
-from app.core.logic.command.name_command_adapter import NameCommandAdapter
-from app.core.model.event.input_event import InputEvent
-from app.core.model.event.response_event import ResponseEvent
+from main.core.logic.command.name_command_adapter import NameCommandAdapter
+from main.core.model.event.input_event import InputEvent
+from main.core.model.event.response_event import ResponseEvent
 
 
 class AskingWhoCommandAdapter(NameCommandAdapter):

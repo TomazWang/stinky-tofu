@@ -1,8 +1,8 @@
 import abc
 
-from app.core.logic.command.command_adapter import CommandAdapter
-from app.core.model.event.input_event import InputEvent
-from app.core.model.event.response_event import ResponseEvent
+from main.core.logic.command.command_adapter import CommandAdapter
+from main.core.model.event.input_event import InputEvent
+from main.core.model.event.response_event import ResponseEvent
 
 
 class NameCommandAdapter(CommandAdapter):

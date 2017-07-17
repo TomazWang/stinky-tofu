@@ -1,7 +1,7 @@
 import unittest
 
-from app.core.logic.command.echo_command_adapter import EchoCommandAdapter
-from app.core.model.event.input_event import InputEvent
+from main.core.logic.command.echo_command_adapter import EchoCommandAdapter
+from main.core.model.event.input_event import InputEvent
 
 
 class TestEchoCommandAdapter(unittest.TestCase):

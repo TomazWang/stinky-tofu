@@ -1,4 +1,4 @@
-from app.core.model.source import Source
+from main.core.model.source import Source
 
 
 class InputEvent:

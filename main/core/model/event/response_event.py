@@ -1,4 +1,4 @@
-from app.core.model.event.input_event import InputEvent
+from main.core.model.event.input_event import InputEvent
 
 
 class ResponseEvent:

@@ -1,9 +1,9 @@
 from linebot import LineBotApi
 from linebot.models import MessageEvent
 
-from app.core.event_adapter.line_msg_adapter import LineMessageEventAdapter
-from app.core.model.event.input_event import InputEvent
-from app.core.model.event.response_event import ResponseEvent
+from main.core.event_adapter.line_msg_adapter import LineMessageEventAdapter
+from main.core.model.event.input_event import InputEvent
+from main.core.model.event.response_event import ResponseEvent
 
 
 class LineCommandBot:

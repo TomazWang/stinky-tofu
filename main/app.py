@@ -10,7 +10,7 @@ from linebot.exceptions import (
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage)
 
-from app.utils import config_loader
+from main.utils import config_loader
 
 app = Flask(__name__)
 
@@ -42,14 +42,14 @@ def bot_info_stinky():
 
 @app.route("/bot/stinky/callback", methods=['POST'])
 def callback():
-    print('app:callback')
+    print('main:callback')
     # get X-Line-Signature header value
     signature = request.headers['X-Line-Signature']
 
     # get request body as text
     body = request.get_data(as_text=True)
     app.logger.info("Request body: " + body)
-    print("app:callback --- ", "Request body: ", body)
+    print("main:callback --- ", "Request body: ", body)
 
     # handle webhook body
     try:
