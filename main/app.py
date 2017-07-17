@@ -8,8 +8,9 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage)
+    MessageEvent, TextMessage)
 
+from main.core.command_bot import LineCommandBot
 from main.utils import config_loader
 
 app = Flask(__name__)
@@ -28,6 +29,8 @@ if CHANNEL_ACCESS_TOKEN is None:
 line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(CHANNEL_SECRET)
 
+
+command_bot = LineCommandBot(line_bot_api)
 
 @app.route('/')
 def home():
@@ -62,10 +65,10 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text="機器人維修中... "))
-    pass
+    # line_bot_api.reply_message(
+    #     event.reply_token,
+    #     TextSendMessage(text="機器人維修中... "))
+    command_bot.handle_message_event(event)
 
 
 if __name__ == "__main__":
