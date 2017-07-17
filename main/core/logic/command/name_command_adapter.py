@@ -6,7 +6,7 @@ from main.core.model.event.response_event import ResponseEvent
 
 
 class NameCommandAdapter(CommandAdapter):
-    def __init__(self, *names) -> None:
+    def __init__(self, names) -> None:
         super().__init__()
         self.alias = names
 
