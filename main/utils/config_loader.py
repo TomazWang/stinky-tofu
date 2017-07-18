@@ -3,8 +3,9 @@ import os
 
 class Config:
     def __init__(self):
-        self.channel_secret = os.environ['CHANNEL_SECRET']
-        self.channel_access_token = os.environ['CHANNEL_ACCESS_TOKEN']
+        self.channel_secret = os.environ.get('CHANNEL_SECRET', '')
+        self.channel_access_token = os.environ.get('CHANNEL_ACCESS_TOKEN','')
+        self.db_uri = os.environ.get('MONGODB_URI', '127.0.0.1')
 #         if 'CHANNEL' in config:
 #             channel_config = config['CHANNEL']
 #             self.channel_secret = channel_config['channel_secret']
