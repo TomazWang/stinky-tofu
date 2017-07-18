@@ -1,3 +1,5 @@
+import os
+
 from chatterbot import ChatBot
 from chatterbot.trainers import ChatterBotCorpusTrainer
 
@@ -36,9 +38,13 @@ class SmartBot:
         )
         # 建立一個 ChatBot
         self.bot.set_trainer(ChatterBotCorpusTrainer)
+
+        base_path = os.path.basename(os.path.dirname(os.path.realpath(__file__)))
+        print('base_path =', base_path)
+
         self.bot.train(
-            "./corpus/greeting/greetings.yml",
-            "./corpus/nerd/science.yml"
+            base_path + "/corpus/greeting/greetings.yml",
+            base_path + "/corpus/nerd/science.yml"
         )
 
     def get_response(self, message=""):
