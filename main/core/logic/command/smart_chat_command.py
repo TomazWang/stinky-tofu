@@ -11,7 +11,7 @@ class SmartChatCommandAdapter(NameCommandAdapter):
 
     def process(self, input_event: InputEvent) -> ResponseEvent:
         message = input_event.content
-        response = self.smart_bot.get_response(message)
+        statement = self.smart_bot.get_response(message)
 
-        res_event = ResponseEvent(ResponseEvent.TYPE_MESSAGE, input_event, content=response)
+        res_event = ResponseEvent(ResponseEvent.TYPE_MESSAGE, input_event, content=statement.text)
         return res_event

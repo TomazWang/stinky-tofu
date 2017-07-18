@@ -1,4 +1,5 @@
 from chatterbot import ChatBot
+from chatterbot.conversation.statement import Statement
 from chatterbot.trainers import ChatterBotCorpusTrainer
 
 from main import setting
@@ -46,7 +47,7 @@ class SmartBot:
             science_file_path
         )
 
-    def get_response(self, message=""):
+    def get_response(self, message="") -> Statement:
         return self.bot.get_response(message)
 
     def export_datas(self):
