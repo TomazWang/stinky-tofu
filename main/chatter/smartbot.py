@@ -1,8 +1,7 @@
-import os
-
 from chatterbot import ChatBot
 from chatterbot.trainers import ChatterBotCorpusTrainer
 
+from main import setting
 from main.utils import config_loader
 
 
@@ -39,12 +38,13 @@ class SmartBot:
         # 建立一個 ChatBot
         self.bot.set_trainer(ChatterBotCorpusTrainer)
 
-        base_path = os.path.basename(os.path.dirname(os.path.realpath(__file__)))
-        print('base_path =', base_path)
+        greeting_file_path = setting.PROJECT_ROOT + '/chatter/corpus/greeting/greetings.yml'
+        science_file_path = setting.PROJECT_ROOT + '/chatter/corpus/nerd/science.yml'
+        print('base_path =', greeting_file_path)
 
         self.bot.train(
-            base_path + "/corpus/greeting/greetings.yml",
-            base_path + "/corpus/nerd/science.yml"
+            greeting_file_path,
+            science_file_path
         )
 
     def get_response(self, message=""):
