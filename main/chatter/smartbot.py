@@ -29,7 +29,7 @@ class SmartBot:
                 },
                 {
                     'import_path': 'chatterbot.logic.LowConfidenceAdapter',
-                    'threshold': 0.3,
+                    'threshold': 0.4,
                     'default_response': '我不清楚你在說什麼'
                 }
             ]
@@ -41,10 +41,14 @@ class SmartBot:
 
         greeting_path = setting.PROJECT_ROOT + '/chatter/corpus/greeting/'
         nerd_path = setting.PROJECT_ROOT + '/chatter/corpus/nerd/'
+        corpus_path = setting.PROJECT_ROOT + '/chatter/corpus/'
 
+        self.bot.train('chatterbot.corpus.english')
         self.bot.train(
             greeting_path + 'greetings.yml',
-            nerd_path + 'science.yml'
+            nerd_path + 'science.yml',
+            corpus_path + 'foodyml',
+            corpus_path + 'conversation.yml'
         )
 
     def get_response(self, message="") -> Statement:
