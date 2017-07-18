@@ -85,10 +85,10 @@ class LineMessageEventAdapter:
 
             data = {
                 'replyToken': res_event.reply_token,
-                'messages': [message.as_json_dict() for message in [message]]
+                'messages': TextSendMessage(text=message).as_json_dict()
             }
 
-            print(data=json.dumps(data))
+            print(json.dumps(data))
 
             self.line_bot_api.reply_message(
                 res_event.reply_token,

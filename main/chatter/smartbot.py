@@ -40,7 +40,6 @@ class SmartBot:
 
         greeting_file_path = setting.PROJECT_ROOT + '/chatter/corpus/greeting/greetings.yml'
         science_file_path = setting.PROJECT_ROOT + '/chatter/corpus/nerd/science.yml'
-        print('base_path =', greeting_file_path)
 
         self.bot.train(
             greeting_file_path,
