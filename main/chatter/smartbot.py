@@ -47,7 +47,7 @@ class SmartBot:
         self.bot.train(
             greeting_path + 'greetings.yml',
             nerd_path + 'science.yml',
-            corpus_path + 'foodyml',
+            corpus_path + 'food.yml',
             corpus_path + 'conversation.yml'
         )
 
