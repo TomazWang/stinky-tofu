@@ -25,12 +25,16 @@ class LineMessageEventAdapter:
 
         user_id = msg_event.source.user_id
         if user_id is not None and len(user_id) > 0:
-            user_profile = self.line_bot_api.get_profile(user_id)
-            sender = Sender(user_id,
-                            display_name=user_profile.display_name,
-                            profile_photo_url=user_profile.picture_url
-                            )
-            source.sender = sender
+
+            try:
+                user_profile = self.line_bot_api.get_profile(user_id)
+                sender = Sender(user_id,
+                                display_name=user_profile.display_name,
+                                profile_photo_url=user_profile.picture_url
+                                )
+                source.sender = sender
+            except:
+                pass
 
         if msg_event.source.type == 'room':
             room_id = msg_event.source.room_id
