@@ -51,7 +51,8 @@ class SmartBot:
         return self.bot.get_response(message)
 
     def export_datas(self):
-        self.bot.trainer.export_for_training('./export.json')
+        export_path = setting.PROJECT_ROOT + '/chatter/output/export.json'
+        self.bot.trainer.export_for_training(export_path)
 
     def stop(self):
         self.export_datas()

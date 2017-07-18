@@ -1,3 +1,5 @@
+import json
+
 from linebot.api import LineBotApi
 from linebot.models import MessageEvent, TextSendMessage
 
@@ -70,11 +72,24 @@ class LineMessageEventAdapter:
         return input_event
 
     def handle_response(self, res_event: ResponseEvent):
+        print('handle_response:')
+
         if res_event is None:
             # do nothing if no response required
+            print('handle_response:', 'no response.')
             return
         if res_event.event_type == res_event.TYPE_MESSAGE:
             message = res_event.content
+            print('handle_response:', 'message response =', message)
+            print('handle_response:', 'reply_token =', res_event.reply_token)
+
+            data = {
+                'replyToken': res_event.reply_token,
+                'messages': [message.as_json_dict() for message in [message]]
+            }
+
+            print(data=json.dumps(data))
+
             self.line_bot_api.reply_message(
                 res_event.reply_token,
                 TextSendMessage(text=message))
