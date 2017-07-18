@@ -9,15 +9,15 @@ class SmartBot:
         super().__init__()
 
         db_uri = config_loader.load_config().mongodb_uri
+        db_name = config_loader.load_config().db_name
         # db_uri = config_loader.load_config().db_uri
-        # db_name = config_loader.load_config().db_name
 
-        # print('db_uri =', db_uri, ', db_name =', db_name)
+        print('db_uri =', db_uri, ', db_name =', db_name)
 
         self.bot = ChatBot(
             # 這個 ChatBot 的名字叫做 Stanley
             "臭豆腐機器人",
-            # database=db_name,
+            database=db_name,
             database_uri=db_uri,
             storage_adapter="chatterbot.storage.MongoDatabaseAdapter",
             logic_adapters=[
