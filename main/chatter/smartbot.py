@@ -26,11 +26,11 @@ class SmartBot:
                     "import_path": "chatterbot.logic.BestMatch",
                     "statement_comparison_function": "chatterbot.comparisons.levenshtein_distance",
                     "response_selection_method": "chatterbot.response_selection.get_first_response"
-                # },
-                # {
-                #     'import_path': 'chatterbot.logic.LowConfidenceAdapter',
-                #     'threshold': 0.65,
-                #     'default_response': '我不清楚你在說什麼'
+                },
+                {
+                    'import_path': 'chatterbot.logic.LowConfidenceAdapter',
+                    'threshold': 0.3,
+                    'default_response': '我不清楚你在說什麼'
                 }
             ]
 
