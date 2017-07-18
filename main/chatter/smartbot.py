@@ -9,6 +9,7 @@ class SmartBot:
         super().__init__()
 
         db_uri = config_loader.load_config().db_uri
+        db_name = config_loader.load_config().db_name
 
         self.bot = ChatBot(
             # 這個 ChatBot 的名字叫做 Stanley
