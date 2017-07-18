@@ -39,15 +39,22 @@ class SmartBot:
         # 建立一個 ChatBot
         self.bot.set_trainer(ChatterBotCorpusTrainer)
 
-        greeting_file_path = setting.PROJECT_ROOT + '/chatter/corpus/greeting/greetings.yml'
-        science_file_path = setting.PROJECT_ROOT + '/chatter/corpus/nerd/science.yml'
+        greeting_path = setting.PROJECT_ROOT + '/chatter/corpus/greeting/'
+        nerd_path = setting.PROJECT_ROOT + '/chatter/corpus/nerd/'
 
         self.bot.train(
-            greeting_file_path,
-            science_file_path
+            greeting_path + 'greetings.yml',
+            nerd_path + 'science.yml'
         )
 
+        # for debug
+        gretting_file_path = greeting_path + 'greetings.yml'
+        with open(gretting_file_path, 'r', encoding='utf-8') as file:
+            for line in file.readlines():
+                print(line)
+
     def get_response(self, message="") -> Statement:
+        print('get response from =', message)
         return self.bot.get_response(message)
 
     def export_datas(self):
