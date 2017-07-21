@@ -67,7 +67,7 @@ class RollDiceCommandAdpater(NameCommandAdapter):
                 die_count = 0
 
         roll_result = []
-        if die_count < 300 and die_face_max < 10000:
+        if die_count <= 300 and die_face_max <= 10000:
             roll_result = self.roll_die(die_face_max, die_count)
         elif die_count > 300:
             result_message = '一次{}個？也太多骰子了吧～:anguished::anguished: \n重來重來，最多300個:game_die:'.format(
