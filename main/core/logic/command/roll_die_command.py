@@ -61,10 +61,10 @@ class RollDiceCommandAdpater(NameCommandAdapter):
         roll_result = []
         if die_count > 300:
             result_message = '一次{}個？也太多骰子了吧～:anguished: \n重來重來，最多300個:game_die:'.format(die_count)
-
-        for i in range(die_count):
-            roll = random.randint(1, die_face_max)
-            roll_result.append(roll)
+        else:
+            for i in range(die_count):
+                roll = random.randint(1, die_face_max)
+                roll_result.append(roll)
 
         if len(roll_result) > 0:
             result_message = "擲了 {}個 {}面骰：\n\n".format(die_count, die_face_max)
