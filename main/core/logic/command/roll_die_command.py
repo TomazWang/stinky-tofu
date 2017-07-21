@@ -47,10 +47,15 @@ class RollDiceCommandAdpater(NameCommandAdapter):
         if len(args) == 1:
             if args[0].isdigit():
                 die_face_max = int(args[0])
+            else:
+                die_face_max = 1
         elif len(args) == 2:
             if args[0].isdigit() and args[1].isdigit():
                 die_count = int(args[0])
                 die_face_max = int(args[1])
+            else:
+                die_count = 0
+                dice_face_max = 1
 
         roll_result = []
         for i in range(die_count):
