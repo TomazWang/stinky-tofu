@@ -1,20 +1,15 @@
 from main.core.model.event.input_event import InputEvent
+from main.core.model.event.multi_response_event import ResponseEvent, ResponseMessage
 
 
-class ResponseEvent:
-    TYPE_MESSAGE = 1
-    TYPE_AUDIO = 2
-    TYPE_IMAGE = 3
-    TYPE_VIDEO = 4
-    TYPE_STICKER = 5
-
+class SingleResponseEvent(ResponseEvent):
+    """
+    ResponseEvent is the older version of Response. 
+    It basically contains only one Response at a time.
+    """
     def __init__(self, event_type: int, input_event: InputEvent, **kwargs) -> None:
-        super().__init__()
+        super().__init__(input_event)
         self.event_type = event_type
-        self.reply_token = input_event.reply_token
-        self.reply_to = input_event.event_source
 
-        if event_type == self.TYPE_MESSAGE:
-            self.content = kwargs.get('content', '')
-        else:
-            self.content = kwargs.get('content', None)
+        kwargs['res_type'] = event_type
+        self.add_response(ResponseMessage(**kwargs))

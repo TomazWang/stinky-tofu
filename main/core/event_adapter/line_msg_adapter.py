@@ -1,17 +1,17 @@
-import json
-
 from linebot.api import LineBotApi
 from linebot.models import MessageEvent, TextSendMessage
+from linebot.models.messages import StickerMessage
 
 from main.core.model.event.input_event import InputEvent
-from main.core.model.event.response_event import ResponseEvent
+from main.core.model.event.multi_response_event import ResponseEvent, ResponseMessage
 from main.core.model.source import Sender, Source, Room, Group
+from main.utils.line_sticker_utls import StickerUtils
 
 
 class LineMessageEventAdapter:
-    '''
+    """
     LineMessageEventAdapter is parse a line message event to an InputEvent obj.
-    '''
+    """
 
     def __init__(self, line_api: LineBotApi) -> None:
         super().__init__()
@@ -82,18 +82,23 @@ class LineMessageEventAdapter:
             # do nothing if no response required
             print('handle_response:', 'no response.')
             return
-        if res_event.event_type == res_event.TYPE_MESSAGE:
-            message = res_event.content
-            print('handle_response:', 'message response =', message)
-            print('handle_response:', 'reply_token =', res_event.reply_token)
 
-            data = {
-                'replyToken': res_event.reply_token,
-                'messages': TextSendMessage(text=message).as_json_dict()
-            }
+        messages = []
+        for response in res_event.responses:
 
-            print(json.dumps(data))
+            if response.res_type == ResponseMessage.TYPE_TEXT:
+                message = response.content
+                print('handle_response:', 'message response =', message)
 
-            self.line_bot_api.reply_message(
-                res_event.reply_token,
-                TextSendMessage(text=message))
+                messages.append(TextSendMessage(text=message))
+
+            elif response.res_type == ResponseMessage.TYPE_STICKER:
+                pkg_id, stk_id = StickerUtils.uri_to_id(response.content)
+                print('handle_reponse:', 'pkg_id = ', pkg_id, 'stk_id', stk_id)
+
+                messages.append(StickerMessage(package_id=pkg_id, sticker_id=stk_id))
+
+        reply_token = res_event.input_event.reply_token
+        print('handle_response:', 'reply_token =', reply_token)
+
+        self.line_bot_api.reply_message(reply_token, messages)

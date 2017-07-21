@@ -1,6 +1,7 @@
 from main.core.logic.command.name_command_adapter import NameCommandAdapter
 from main.core.model.event.input_event import InputEvent
-from main.core.model.event.response_event import ResponseEvent
+from main.core.model.event.multi_response_event import ResponseMessage
+from main.core.model.event.response_event import SingleResponseEvent
 from main.utils import cht_utils
 
 
@@ -15,7 +16,7 @@ class EchoCommandAdapter(NameCommandAdapter):
         message_text = cht_utils.strip_leading_ch_symbol(message_text)
         return any(message_text.startswith(kw) for kw in self.keywords)
 
-    def process(self, input_event: InputEvent) -> ResponseEvent:
+    def process(self, input_event: InputEvent) -> SingleResponseEvent:
         message_text = super().filter_out_names(input_event.content).strip()
         print('message_text = ('+message_text+')')
         message_text = cht_utils.strip_leading_ch_symbol(message_text)
@@ -30,5 +31,5 @@ class EchoCommandAdapter(NameCommandAdapter):
         message_text = message_text.lstrip()
         print('message_text = ('+message_text+')')
 
-        res_event = ResponseEvent(ResponseEvent.TYPE_MESSAGE, input_event, content=message_text)
+        res_event = SingleResponseEvent(ResponseMessage.TYPE_TEXT, input_event, content=message_text)
         return res_event

@@ -1,7 +1,7 @@
 import abc
 
 from main.core.model.event.input_event import InputEvent
-from main.core.model.event.response_event import ResponseEvent
+from main.core.model.event.multi_response_event import ResponseEvent
 
 
 class CommandAdapter(object, metaclass=abc.ABCMeta):

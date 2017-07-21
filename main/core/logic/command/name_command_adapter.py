@@ -2,7 +2,7 @@ import abc
 
 from main.core.logic.command.command_adapter import CommandAdapter
 from main.core.model.event.input_event import InputEvent
-from main.core.model.event.response_event import ResponseEvent
+from main.core.model.event.response_event import SingleResponseEvent
 
 
 class NameCommandAdapter(CommandAdapter):
@@ -20,7 +20,7 @@ class NameCommandAdapter(CommandAdapter):
             return True
 
     @abc.abstractmethod
-    def process(self, input_event: InputEvent) -> ResponseEvent:
+    def process(self, input_event: InputEvent) -> SingleResponseEvent:
         pass
 
     def filter_out_names(self, content_text) -> str:

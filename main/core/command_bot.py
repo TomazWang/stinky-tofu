@@ -8,7 +8,7 @@ from main.core.logic.command.introduce_command_adpater import IntroduceCommandAd
 from main.core.logic.command.smart_chat_command import SmartChatCommandAdapter
 from main.core.logic.command.unknown_command_adapter import UnknownCommandAdapter
 from main.core.model.event.input_event import InputEvent
-from main.core.model.event.response_event import ResponseEvent
+from main.core.model.event.multi_response_event import ResponseEvent
 
 
 class LineCommandBot:
