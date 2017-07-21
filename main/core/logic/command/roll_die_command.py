@@ -1,5 +1,7 @@
 import random
 
+import emoji
+
 from main.core.logic.command.name_command_adapter import NameCommandAdapter
 from main.core.model.event.input_event import InputEvent
 from main.core.model.event.multi_response_event import ResponseMessage
@@ -39,9 +41,9 @@ class RollDiceCommandAdpater(NameCommandAdapter):
         die_face_max = 6
         die_count = 1
 
-        result_message = '請問是怎樣的骰子呢？\n\n' \
+        result_message = '請問是怎樣的骰子呢？:confused:\n\n' \
                          '請對我說："機器人 擲骰子 [幾個 幾面骰]"，或是 "機器人 擲骰子 [幾面骰]"。\n\n' \
-                         '[]中的資料可以不用輸入，預設是一個六面骰。\n\n' \
+                         '[]中的資料可以不用輸入，預設是一個六面骰。:game_die:\n\n' \
                          'ex: 機器人 擲骰子 3 12'
 
         if len(args) == 1:
@@ -55,9 +57,11 @@ class RollDiceCommandAdpater(NameCommandAdapter):
                 die_face_max = int(args[1])
             else:
                 die_count = 0
-                dice_face_max = 1
 
         roll_result = []
+        if die_count > 300:
+            result_message = '一次{}個？也太多骰子了吧～:anguished: \n重來重來，最多300個:game_die:'.format(die_count)
+
         for i in range(die_count):
             roll = random.randint(1, die_face_max)
             roll_result.append(roll)
@@ -66,15 +70,17 @@ class RollDiceCommandAdpater(NameCommandAdapter):
             result_message = "擲了 {}個 {}面骰：\n\n".format(die_count, die_face_max)
 
         if len(roll_result) > 1:
-            result_message += "總共：{}\n".format(sum(roll_result))
+            result_message += "總合：{}\n".format(sum(roll_result))
             result_message += "骰子結果："
-            result_message += ",".join(str(r) for r in roll_result)
+            result_message += ", ".join(str(r) for r in roll_result)
         elif len(roll_result) == 1:
             result_message += "結果：{}\n".format(sum(roll_result))
+
+        result_message = emoji.emojize(result_message, use_aliases=True)
 
         res_event = SingleResponseEvent(
             ResponseMessage.TYPE_TEXT,
             input_event,
-            content=str(result_message))
+            content=result_message)
 
         return res_event
