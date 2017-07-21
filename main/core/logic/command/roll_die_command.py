@@ -59,7 +59,10 @@ class RollDiceCommandAdpater(NameCommandAdapter):
 
         if len(roll_result) > 0:
             result_message = "擲了 {}個 {}面骰：\n\n".format(die_count, die_face_max)
-            result_message += "總共：{}\n\n".format(sum(roll_result))
+            result_message += "總共：{}\n".format(sum(roll_result))
+
+        if len(roll_result) > 1:
+            result_message += "骰子結果："
             result_message += ",".join(str(r) for r in roll_result)
 
         res_event = SingleResponseEvent(
