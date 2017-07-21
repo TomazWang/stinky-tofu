@@ -5,6 +5,7 @@ from main.core.event_adapter.line_msg_adapter import LineMessageEventAdapter
 from main.core.logic.command.asking_who_command_adpater import AskingWhoCommandAdapter
 from main.core.logic.command.echo_command_adapter import EchoCommandAdapter
 from main.core.logic.command.introduce_command_adpater import IntroduceCommandAdapter
+from main.core.logic.command.roll_die_command import RollDiceCommandAdpater
 from main.core.logic.command.smart_chat_command import SmartChatCommandAdapter
 from main.core.logic.command.unknown_command_adapter import UnknownCommandAdapter
 from main.core.model.event.input_event import InputEvent
@@ -26,6 +27,7 @@ class LineCommandBot:
             AskingWhoCommandAdapter(self.names),
             EchoCommandAdapter(self.names),
             IntroduceCommandAdapter(self.names),
+            RollDiceCommandAdpater(self.names),
             SmartChatCommandAdapter(self.names)
         ]
         self.default_command_adapter = UnknownCommandAdapter(self.names)
