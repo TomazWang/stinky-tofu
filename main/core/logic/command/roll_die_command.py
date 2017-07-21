@@ -69,7 +69,7 @@ class RollDiceCommandAdpater(NameCommandAdapter):
             result_message += "總共：{}\n".format(sum(roll_result))
             result_message += "骰子結果："
             result_message += ",".join(str(r) for r in roll_result)
-        else:
+        elif len(roll_result) == 1:
             result_message += "結果：{}\n".format(sum(roll_result))
 
         res_event = SingleResponseEvent(
