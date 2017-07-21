@@ -1,4 +1,5 @@
 import random
+from typing import List
 
 import emoji
 
@@ -24,6 +25,13 @@ class RollDiceCommandAdpater(NameCommandAdapter):
         message_text = super().filter_out_names(input_event.content).lstrip()
         message_text = cht_utils.strip_leading_ch_symbol(message_text)
         return any(message_text.startswith(kw) for kw in self.keywords)
+
+    def roll_die(self, dice_face, dice_count) -> List[int]:
+        roll_result = []
+        for i in range(dice_count):
+            roll = random.randint(1, dice_face)
+            roll_result.append(roll)
+        return roll_result
 
     def process(self, input_event: InputEvent) -> SingleResponseEvent:
         message_text = super().filter_out_names(input_event.content).strip()
@@ -59,12 +67,14 @@ class RollDiceCommandAdpater(NameCommandAdapter):
                 die_count = 0
 
         roll_result = []
-        if die_count > 300:
-            result_message = '一次{}個？也太多骰子了吧～:anguished: \n重來重來，最多300個:game_die:'.format(die_count)
-        else:
-            for i in range(die_count):
-                roll = random.randint(1, die_face_max)
-                roll_result.append(roll)
+        if die_count < 300 and die_face_max < 10000:
+            roll_result = self.roll_die(die_face_max, die_count)
+        elif die_count > 300:
+            result_message = '一次{}個？也太多骰子了吧～:anguished::anguished: \n重來重來，最多300個:game_die:'.format(
+                die_count)
+        elif die_face_max > 10000:
+            result_message = '{}面骰？哪有這種骰子啊～:anguished::anguished: \n重來重來，最多10000面:game_die:'.format(
+                die_face_max)
 
         if len(roll_result) > 0:
             result_message = "擲了 {}個 {}面骰：\n\n".format(die_count, die_face_max)
