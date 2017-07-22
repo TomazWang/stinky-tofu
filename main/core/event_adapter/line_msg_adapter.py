@@ -29,9 +29,11 @@ class LineMessageEventAdapter:
         if user_id is not None and len(user_id) > 0:
 
             try:
-                logging.info('LineMessageEventAdapter >>, handle_input:', 'handle user_profile')
+                logging.info(
+                    'LineMessageEventAdapter >> '
+                    'handle_input: handle user_profile, user_id = ' + user_id)
+
                 user_profile = self.line_bot_api.get_profile(user_id)
-                logging.info('LineMessageEventAdapter >>, handle_input:', 'handle user_profile')
                 sender = Sender(user_id,
                                 display_name=user_profile.display_name,
                                 profile_photo_url=user_profile.picture_url
