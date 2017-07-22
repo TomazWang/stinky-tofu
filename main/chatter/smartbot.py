@@ -1,3 +1,5 @@
+import logging
+
 from chatterbot import ChatBot
 from chatterbot.conversation.statement import Statement
 from chatterbot.trainers import ChatterBotCorpusTrainer
@@ -14,7 +16,7 @@ class SmartBot:
         db_name = config_loader.load_config().db_name
         # db_uri = config_loader.load_config().db_uri
 
-        print('db_uri =', db_uri, ', db_name =', db_name)
+        logging.debug('SmartBot >> root: db_uri = {}, db_name ={}'.format(db_uri, db_name))
 
         self.bot = ChatBot(
             "臭豆腐機器人",
@@ -52,7 +54,7 @@ class SmartBot:
         )
 
     def get_response(self, message="") -> Statement:
-        print('get response from =', message)
+        logging.info('SmartBot >> get_response: get response from = {}'.format(message))
         return self.bot.get_response(message)
 
     def export_datas(self):

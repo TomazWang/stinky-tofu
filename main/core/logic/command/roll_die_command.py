@@ -39,9 +39,7 @@ class RollDiceCommandAdpater(NameCommandAdapter):
 
         for kw in self.keywords:
             if message_text.startswith(kw):
-                print('find kw :', kw)
                 message_text = message_text[len(kw):]
-                print('message_text = (' + message_text + ')')
 
         message_text = message_text.lstrip()
 

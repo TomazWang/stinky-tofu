@@ -21,10 +21,10 @@ CHANNEL_ACCESS_TOKEN = config_data.channel_access_token
 CHANNEL_SECRET = config_data.channel_secret
 
 if CHANNEL_SECRET is None:
-    print('Specify LINE_CHANNEL_SECRET as environment variable.')
+    logging.warning('Specify LINE_CHANNEL_SECRET as environment variable.')
     sys.exit(1)
 if CHANNEL_ACCESS_TOKEN is None:
-    print('Specify LINE_CHANNEL_ACCESS_TOKEN as environment variable.')
+    logging.warning('Specify LINE_CHANNEL_ACCESS_TOKEN as environment variable.')
     sys.exit(1)
 
 line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
@@ -48,14 +48,13 @@ def bot_info_stinky():
 
 @app.route("/bot/stinky/callback", methods=['POST'])
 def callback():
-    print('main:callback')
     # get X-Line-Signature header value
     signature = request.headers['X-Line-Signature']
 
     # get request body as text
     body = request.get_data(as_text=True)
     app.logger.info("Request body: " + body)
-    print("main:callback --- ", "Request body: ", body)
+    logging.info("main >> callback: Request body = {}".format(body))
 
     # handle webhook body
     try:
