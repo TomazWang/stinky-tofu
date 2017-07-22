@@ -14,6 +14,8 @@ from linebot.models import (
 from main.core.command_bot import LineCommandBot
 from main.utils import config_loader
 
+logging.basicConfig(level=logging.DEBUG)
+
 app = Flask(__name__)
 
 config_data = config_loader.load_config()
@@ -51,7 +53,7 @@ def callback():
 
     # get request body as text
     body = request.get_data(as_text=True)
-    app.logger.info("Request body: " + body)
+    # app.logger.info("Request body: " + body)
     logging.info('main >> callback: Request body = {}'.format(body))
 
     # handle webhook body
@@ -72,5 +74,4 @@ def handle_message(event):
 
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO)
     app.run()
