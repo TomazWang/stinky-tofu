@@ -82,11 +82,9 @@ class LineMessageEventAdapter:
         return input_event
 
     def handle_response(self, res_event: ResponseEvent):
-        logging.info('handle_response:')
-
         if res_event is None:
             # do nothing if no response required
-            logging.info('handle_response: no response.')
+            logging.info('LineMessageEventAdapter >> handle_response: no response.')
             return
 
         messages = []
@@ -94,18 +92,20 @@ class LineMessageEventAdapter:
 
             if response.res_type == ResponseMessage.TYPE_TEXT:
                 message = response.content
-                logging.info('handle_response: message response = ' + message)
+                logging.info('LineMessageEventAdapter >> handle_response: '
+                             'message response = {}'.format(message))
 
                 messages.append(TextSendMessage(text=message))
 
             elif response.res_type == ResponseMessage.TYPE_STICKER:
                 pkg_id, stk_id = StickerUtils.uri_to_id(response.content)
-                logging.info('handle_reponse: pkg_id = {}, stk_id = {}'.format(pkg_id, stk_id))
+                logging.info('LineMessageEventAdapter >> handle_response: '
+                             'pkg_id = {}, stk_id = {}'.format(pkg_id, stk_id))
 
                 messages.append(StickerMessage(package_id=pkg_id, sticker_id=stk_id))
 
-        logging.info('handle_reponse: messages = {}'.format(messages))
+        logging.info('LineMessageEventAdapter >> handle_response: messages = {}'.format(messages))
         reply_token = res_event.input_event.reply_token
-        logging.info('handle_response: reply_token = ' + reply_token)
+        logging.info('LineMessageEventAdapter >> handle_response: reply_token = ' + reply_token)
 
         self.line_bot_api.reply_message(reply_token, messages)
