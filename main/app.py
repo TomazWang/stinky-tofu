@@ -14,7 +14,7 @@ from linebot.models import (
 from main.core.command_bot import LineCommandBot
 from main.utils import config_loader
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 
 app = Flask(__name__)
 
