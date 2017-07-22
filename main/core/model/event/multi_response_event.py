@@ -48,3 +48,6 @@ class ResponseEvent:
         :return: None
         """
         self.responses.append(res)
+
+    def response_count(self):
+        return len(self.responses)
