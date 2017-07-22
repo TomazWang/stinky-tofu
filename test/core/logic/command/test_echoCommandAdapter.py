@@ -26,7 +26,6 @@ class TestEchoCommandAdapter(unittest.TestCase):
 
     def test_process(self):
         for statement in self.expect_dict.keys():
-            print('testing ', statement, ':')
             input_event = InputEvent(InputEvent.TYPE_TEXT, content=statement)
             res_event = self.echo_adapter.process(input_event)
 

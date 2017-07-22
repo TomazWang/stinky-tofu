@@ -1,3 +1,5 @@
+import logging
+
 from main.core.logic.command.name_command_adapter import NameCommandAdapter
 from main.core.model.event.input_event import InputEvent
 from main.core.model.event.multi_response_event import ResponseMessage
@@ -18,18 +20,15 @@ class EchoCommandAdapter(NameCommandAdapter):
 
     def process(self, input_event: InputEvent) -> SingleResponseEvent:
         message_text = super().filter_out_names(input_event.content).strip()
-        print('message_text = ('+message_text+')')
+        logging.info('EchoCommandAdapter >> process: message_text = ({})'.format(message_text))
         message_text = cht_utils.strip_leading_ch_symbol(message_text)
-        print('message_text = ('+message_text+')')
+        logging.info('EchoCommandAdapter >> process: message_text = ({})'.format(message_text))
 
         for kw in self.keywords:
             if message_text.startswith(kw):
-                print('find kw :', kw)
                 message_text = message_text[len(kw):]
-                print('message_text = ('+message_text+')')
 
         message_text = message_text.lstrip()
-        print('message_text = ('+message_text+')')
 
         res_event = SingleResponseEvent(ResponseMessage.TYPE_TEXT, input_event, content=message_text)
         return res_event
