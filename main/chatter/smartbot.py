@@ -31,11 +31,10 @@ class SmartBot:
                 },
                 {
                     'import_path': 'chatterbot.logic.LowConfidenceAdapter',
-                    'threshold': 0.6,
+                    'threshold': 0.5,
                     'default_response': '我不清楚你在說什麼'
                 }
-            ],
-            read_only=True
+            ]
         )
 
         # train the bot
