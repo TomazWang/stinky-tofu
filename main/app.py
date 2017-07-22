@@ -33,8 +33,6 @@ handler = WebhookHandler(CHANNEL_SECRET)
 
 command_bot = LineCommandBot(line_bot_api)
 
-logging.basicConfig(level=logging.INFO)
-
 @app.route('/')
 def home():
     return 'Hello tomazium bot.'
@@ -54,7 +52,7 @@ def callback():
     # get request body as text
     body = request.get_data(as_text=True)
     app.logger.info("Request body: " + body)
-    logging.info("main >> callback: Request body = {}".format(body))
+    logging.info('main >> callback: Request body = {}'.format(body))
 
     # handle webhook body
     try:
@@ -74,4 +72,5 @@ def handle_message(event):
 
 
 if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO)
     app.run()
