@@ -49,7 +49,7 @@ class RollDiceCommandAdpater(NameCommandAdapter):
         die_face_max = 6
         die_count = 1
 
-        result_message = '請問是怎樣的骰子呢？:confused:\n\n' \
+        result_message = '請問是怎樣的骰子呢？:thinking_face:\n\n' \
                          '請對我說："機器人 擲骰子 [幾個 幾面骰]"，或是 "機器人 擲骰子 [幾面骰]"。\n\n' \
                          '[]中的資料可以不用輸入，預設是一個六面骰。:game_die:\n\n' \
                          'ex: 機器人 擲骰子 3 12'
