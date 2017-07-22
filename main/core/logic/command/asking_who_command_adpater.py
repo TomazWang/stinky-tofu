@@ -1,3 +1,5 @@
+import logging
+
 import emoji
 
 from main.core.logic.command.name_command_adapter import NameCommandAdapter
@@ -18,9 +20,13 @@ class AskingWhoCommandAdapter(NameCommandAdapter):
 
     def process(self, input_event: InputEvent) -> SingleResponseEvent:
 
+        logging.info('AskingWhoCommandAdapter >> process:', 'start processing')
+
         response_event = SingleResponseEvent(ResponseMessage.TYPE_TEXT, input_event)
 
         display_name = input_event.event_source.sender.display_name
+        logging.info('AskingWhoCommandAdapter >> process:', 'display_name =', display_name)
+
         if display_name is None or len(display_name) <= 0:
             response_event.content = emoji.emojize(
                 '我還不認識你耶～\n' +

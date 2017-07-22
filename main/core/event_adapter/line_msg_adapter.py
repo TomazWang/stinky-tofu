@@ -1,3 +1,5 @@
+import logging
+
 from linebot.api import LineBotApi
 from linebot.models import MessageEvent, TextSendMessage
 from linebot.models.messages import StickerMessage
@@ -27,7 +29,9 @@ class LineMessageEventAdapter:
         if user_id is not None and len(user_id) > 0:
 
             try:
+                logging.info('LineMessageEventAdapter >>, handle_input:', 'handle user_profile')
                 user_profile = self.line_bot_api.get_profile(user_id)
+                logging.info('LineMessageEventAdapter >>, handle_input:', 'handle user_profile')
                 sender = Sender(user_id,
                                 display_name=user_profile.display_name,
                                 profile_photo_url=user_profile.picture_url
@@ -98,6 +102,7 @@ class LineMessageEventAdapter:
 
                 messages.append(StickerMessage(package_id=pkg_id, sticker_id=stk_id))
 
+        print('handle_reponse:', 'messages =', messages)
         reply_token = res_event.input_event.reply_token
         print('handle_response:', 'reply_token =', reply_token)
 

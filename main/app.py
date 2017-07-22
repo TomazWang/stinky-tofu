@@ -1,3 +1,4 @@
+import logging
 import sys
 
 from flask import Flask, abort, request
@@ -31,6 +32,8 @@ handler = WebhookHandler(CHANNEL_SECRET)
 
 
 command_bot = LineCommandBot(line_bot_api)
+
+logging.basicConfig(level=logging.INFO)
 
 @app.route('/')
 def home():
