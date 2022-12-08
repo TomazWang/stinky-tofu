@@ -1,4 +1,4 @@
-certifi==2017.4.17
+certifi==2022.12.7
 chardet==3.0.4
 ChatterBot==0.7.0
 chatterbot-corpus==1.0.0
